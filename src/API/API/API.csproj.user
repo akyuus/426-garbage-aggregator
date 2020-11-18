@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>API.Models.TodoContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_DbContextDialogWidth>600</WebStackScaffolding_DbContextDialogWidth>
+    <NameOfLastUsedPublishProfile>garbageAPIPrototype - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

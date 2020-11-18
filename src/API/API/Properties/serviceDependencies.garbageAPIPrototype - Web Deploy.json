@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/garbage-aggregator-API/apis/prototype",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/garbageaggregator/databases/garbageaggregator",
+      "type": "mssql.azure",
+      "connectionId": "GarbageConnection",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
