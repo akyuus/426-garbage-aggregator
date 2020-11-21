@@ -25,6 +25,7 @@ namespace API.Controllers
         [Produces("application/json")]
         public async Task<Post[]> Get(string query = "cats", int limit = 10, string type = "all", string site = "both", string sort = "score", bool reverse = false)
         {
+            Response.Cookies.Append("user_id", "1");
             query = System.Web.HttpUtility.UrlEncode(query);
             query = query.Replace('_', ' ');
             Post[] finalResult = null;
@@ -43,7 +44,7 @@ namespace API.Controllers
                 {
                     Array.Sort(finalResult, delegate (Post Post1, Post Post2)
                     {
-                        return Post1.date.CompareTo(Post2.date);
+                        return Post2.date.CompareTo(Post1.date);
                     });
                 }
                 
@@ -62,7 +63,7 @@ namespace API.Controllers
                 {
                     Array.Sort(finalResult, delegate (Post Post1, Post Post2)
                     {
-                        return Post1.date.CompareTo(Post2.date);
+                        return Post2.date.CompareTo(Post1.date);
                     });
                 }
                 
@@ -81,7 +82,7 @@ namespace API.Controllers
                 {
                     Array.Sort(finalResult, delegate (Post Post1, Post Post2)
                     {
-                        return Post1.date.CompareTo(Post2.date);
+                        return Post2.date.CompareTo(Post1.date);
                     });
                 }
                 
@@ -99,7 +100,12 @@ namespace API.Controllers
             {
                 finalResult = finalResult.Where(post => post.postType.Equals("other")).ToArray();
             }
-            return finalResult.Take(limit).ToArray();
+
+            if (finalResult.Length >= limit)
+            {
+                return finalResult.Take(limit).ToArray();
+            }
+            else return finalResult.ToArray();
         }
         private async Task<Post[]> twitterHandler(string query, int limit, string type, string sort, bool reverse)
         {
@@ -121,18 +127,19 @@ namespace API.Controllers
             foreach(ITweet tweet in searchResponse)
             {
                 string sourceURL = tweet.Url;
-                int score = tweet.FavoriteCount;
+                int score = tweet.FavoriteCount + tweet.RetweetCount;
                 string author = tweet.CreatedBy.Name;
                 string sourceSite = "twitter";
                 long date = tweet.CreatedAt.ToUnixTimeSeconds();
                 string postType = "text";
                 string previewMediaURL = null;
+                string text = tweet.Text;
                 if(tweet.Media.Count > 0)
                 {
                     postType = "other";
                     previewMediaURL = tweet.Media[0].MediaURL;
                 }
-                result[i] = new Post(sourceURL: sourceURL, query: query, score: score, author: author, sourceSite: sourceSite, date: date, postType: postType, previewMediaURL: previewMediaURL);
+                result[i] = new Post(sourceURL: sourceURL, query: query, score: score, author: author, sourceSite: sourceSite, date: date, text: text, postType: postType, previewMediaURL: previewMediaURL);
                 i++;
             }
             return result;

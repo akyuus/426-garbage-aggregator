@@ -31,6 +31,7 @@ namespace API
         {
 
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GarbageConnection")));
+            services.AddDbContext<ApplicationUserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GarbageConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,7 +55,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("Set-Cookie"));
             app.UseAuthentication();
             app.UseAuthorization();
 
