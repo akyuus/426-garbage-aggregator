@@ -76,7 +76,7 @@ namespace API.Controllers
             else
             {
                 Preferences result = new Preferences("FAILED HERE 1", "", "", false);
-                return result;
+                return null;
             }
 
             if(SecurePasswordHasher.Verify(password, applicationUser.password))
@@ -86,13 +86,13 @@ namespace API.Controllers
                     Expires = DateTime.Now.AddHours(1)
                 };
                 Response.Cookies.Append("user_id", Convert.ToString(applicationUser.Id), options);
-                Preferences result = new Preferences(applicationUser.sortPref, applicationUser.typePref, applicationUser.sitePref, applicationUser.reversePref);
+                Preferences result = new Preferences(applicationUser.sortPref, applicationUser.typePref, applicationUser.sitePref, applicationUser.reversePref, applicationUser.Id);
                 return result;
             }
             else
             {
                 Preferences result = new Preferences("FAILED HERE 2", "", "", false);
-                return result;
+                return null;
             }
         }
 
@@ -102,14 +102,18 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPreferences(int id, ApplicationUser applicationUser)
         {
-            var user = _context.ApplicationUsers.Where(u => u.username == applicationUser.username && u.Id == id);
-            if(!(user.Count() > 0))
+            var userList = _context.ApplicationUsers.Where(u => u.username.Equals(applicationUser.username) && u.Id == id);
+            if(!(userList.Count() > 0) || !SecurePasswordHasher.Verify(applicationUser.password, userList.FirstOrDefault().password))
             {
                 return BadRequest();
             }
 
-            applicationUser.Id = id;
-            _context.Entry(applicationUser).State = EntityState.Modified;
+            var user = userList.FirstOrDefault();
+            user.sitePref = applicationUser.sitePref;
+            user.reversePref = applicationUser.reversePref;
+            user.typePref = applicationUser.typePref;
+            user.sortPref = applicationUser.sortPref;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {

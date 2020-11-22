@@ -391,6 +391,10 @@
         },
         "reversePref": {
           "type": "boolean"
+        },
+        "id": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
