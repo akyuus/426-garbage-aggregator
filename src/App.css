@@ -32,6 +32,16 @@
   background-color: #282c34;
 }
 
+.embed {
+  max-width: 100vh;
+}
+
+.content{
+  color: white;
+  line-break: normal;
+  max-width: 100vh;
+}
+
 .search {
   background-color: white;
   display: flex;
@@ -39,6 +49,32 @@
   align-items: center;
   justify-content: center;
   color: black;
+}
+
+.text {
+  max-width: 100vh;
+  min-width: 100vh;
+}
+
+.image {
+  max-width: 500px;
+  max-height: 500px;
+  height: auto;
+  width: auto;
+}
+
+.post {
+  background-color: #282c34;
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-radius: 50;
+  border-style: solid;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
 .App-header {

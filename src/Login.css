@@ -8,3 +8,15 @@
     font-size: calc(10px + 2vmin);
     color: white;
   }
+
+  .login{
+    border-color: transparent;
+    border-radius: 10;
+    border-style: solid;
+  }
+
+  .signup{
+    border-color: transparent;
+    border-radius: 50;
+    border-style: solid;
+  }
