@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using Tweetinvi;
 
 namespace API
 {
@@ -27,20 +27,16 @@ namespace API
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            });
 
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GarbageConnection")));
+            services.AddDbContext<ApplicationUserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("GarbageConnection")));
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+               c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,13 +46,16 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("v1/swagger.json", "API v1");
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("Set-Cookie"));
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -64,6 +63,7 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
