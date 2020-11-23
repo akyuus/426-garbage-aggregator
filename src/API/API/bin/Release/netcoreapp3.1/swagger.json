@@ -68,6 +68,11 @@
         "tags": [
           "ApplicationUsers"
         ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
         "produces": [
           "text/plain",
           "application/json",
@@ -80,6 +85,13 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ApplicationUser"
+            }
           }
         ],
         "responses": {

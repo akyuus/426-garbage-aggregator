@@ -162,7 +162,7 @@ namespace API.Controllers
 
         // DELETE: api/ApplicationUsers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ApplicationUser>> DeleteApplicationUser(int id)
+        public async Task<ActionResult<ApplicationUser>> DeleteApplicationUser(int id, ApplicationUser currentUser)
         {
             string cookieValue;
             try
@@ -182,6 +182,11 @@ namespace API.Controllers
             if (applicationUser == null)
             {
                 return NotFound();
+            }
+
+            if(!SecurePasswordHasher.Verify(currentUser.password, applicationUser.password))
+            {
+                return Unauthorized();
             }
 
             _context.ApplicationUsers.Remove(applicationUser);
