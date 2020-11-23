@@ -1,10 +1,10 @@
-## The Garbage Aggregator 
+# The Garbage Aggregator 
 
 This is an application that lets you query both Reddit and Twitter and access the results. The url for the site is https://426garbageaggregator.azurewebsites.net/.
 
-## API Documentation
+# API Documentation
 
-# 1) Post objects
+## 1) Post objects
 
 Posts have the following properties:
 ```
@@ -22,7 +22,7 @@ postType        | string | One of "text" or "other".
 previewMediaURL | string | If media is found in the post, this is the URL of the first one found. Could be a link, or an image. 
 
 ```
-# 2) Getting Posts
+## 2) Getting Posts
 
 ```
 Endpoint: GET https://garbageapiprototype.azurewebsites.net/api/Posts
