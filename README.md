@@ -48,10 +48,11 @@ Parameters:
 Response: Responds with an array of **Post** objects.
 
 Example Axios Request: 
-```axios.get('https://garbageapiprototype.azurewebsites.net/api/Posts?query=' + query+ "&limit=30&site=" + user.sites+ "&type=" + user.content + "&sort="+ user.sortBy + "&reverse=" + user.sort)```
+```js
+ axios.get('https://garbageapiprototype.azurewebsites.net/api/Posts?query=' + query+ "&limit=30&site=" + user.sites+ "&type=" + user.content + "&sort="+ user.sortBy + "&reverse=" + user.sort)```
 
 Example Response: ```[{"sourceURL":"https://reddit.com/r/aww/comments/ckbolc/this_is_tiger_he_just_turned_31_we_are_told_he_is/","query":"cats","text":"This is Tiger. He just turned 31. We are told he is the oldest cat in the state of Illinois","score":181060,"date":1564594564,"author":"Aritilli","sourceSite":"reddit","subreddit":"r/aww","postType":"other","previewMediaURL":"https://i.redd.it/sg3q5cuedod31.jpg"}, ... ]``` 
  
-# 3) Get User
+## 3) Get User
 
 
