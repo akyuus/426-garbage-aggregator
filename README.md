@@ -194,6 +194,14 @@ Note: This endpoint is not used in the application.
 Endpoint: DELETE https://garbageapiprototype.azurewebsites.net/api/ApplicationUsers/:id
 ```
 
+Parameters:
+  1) username (string) - Your username.
+  2) password (string) - Your password.
+  3) sortPref (string) - Sorting preferences (see Preference object above).
+  4) typePref (string) - Type preferences 
+  5) sitePref (string) - Site preferences
+  6) reversePref (bool) - Reverse preference
+  
 This fails and returns a 401 if you are not logged in as this user.
 
 Example Axios Request:
@@ -201,6 +209,14 @@ Example Axios Request:
 axios({
   method: "delete",
   url: "https://garbageapiprototype.azurewebsites.net/api/ApplicationUsers/"+user.id,
+  data: {
+        username: name, 
+        password: pass, 
+        sortPref: "score", 
+        typePref: "all", 
+        sitePref: "both", 
+        reversePref: false
+  }
 })
 ```
 
