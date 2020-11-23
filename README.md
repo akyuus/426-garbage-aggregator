@@ -4,11 +4,11 @@ This is an application that lets you query both Reddit and Twitter and access th
 
 # API Documentation
 
-## 1) Post objects
+## 1) Resources
 
 Posts have the following properties:
 ```
-attribute  |  type  |  description
+attribute       |  type  |  description
 -----------------------------------------------------------
 sourceURL       | string | The url of the post.
 query           | string | The search query used to find this.
@@ -22,6 +22,17 @@ postType        | string | One of "text" or "other".
 previewMediaURL | string | If media is found in the post, this is the URL of the first one found. Could be a link, or an image. 
 
 ```
+
+Preference objects have these properties:
+```
+attribute       |  type  |  description
+-----------------------------------------------------------
+id              | id     | The id of the associated user.
+sortPref        | string | The sort preference of the associated user ("score" or "new").
+typePref        | string | The type preference of the associated user ("text","other", or "all").
+sitePref        | string | The site preference of the associated user ("reddit", "twitter", or "both").
+reversePref     | bool   | The reverse preference of the associated user (true or false). 
+```
 ## 2) Getting Posts
 
 ```
@@ -34,10 +45,13 @@ Parameters:
   4) site (string) - Optional. Must be one of "reddit", "twitter", or "both". Determines what site to get posts from. Defaults to "both".
   5) reverse (boolean) - Optional. Reverses the output if true. Defaults to false.
 
-Response: Responds with an array of **Post** objects. 
-Example Axios Request: ```GET https://garbageapiprototype.azurewebsites.net/api/Posts?query=cats&limit=10&type=twitter``` 
+Response: Responds with an array of **Post** objects.
 
-Example 
+Example Axios Request: 
+```axios.get('https://garbageapiprototype.azurewebsites.net/api/Posts?query=' + query+ "&limit=30&site=" + user.sites+ "&type=" + user.content + "&sort="+ user.sortBy + "&reverse=" + user.sort)```
+
+Example Response: ```[{"sourceURL":"https://reddit.com/r/aww/comments/ckbolc/this_is_tiger_he_just_turned_31_we_are_told_he_is/","query":"cats","text":"This is Tiger. He just turned 31. We are told he is the oldest cat in the state of Illinois","score":181060,"date":1564594564,"author":"Aritilli","sourceSite":"reddit","subreddit":"r/aww","postType":"other","previewMediaURL":"https://i.redd.it/sg3q5cuedod31.jpg"}, ... ]``` 
+ 
 # 3) Get User
 
 
