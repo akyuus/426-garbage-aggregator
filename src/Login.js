@@ -101,7 +101,6 @@ export async function performLogin(name, password){
                 if(getCookie("user") !== "" || getCookie("user") === name){
                 }else{
                     deleteAllCookies();
-                    createCookie("user_id", user.id, 0.05);
                 createCookie("user", name, .05);
                 createCookie("pass", password, .05);
                 }

@@ -88,31 +88,27 @@ function getLogin(){
       if(post.sourceSite == "reddit"){
       sub = (<div>Subreddit: {post.subreddit}</div>)
       if(post.postType == "text") {
-      content = (<div id = "content"> <p className = "text">{post.text}</p></div>);
+      content = (<div className = "content" onClick ={function(){window.open(post.sourceURL)}}> <p className = "text">{post.text}</p></div>);
       } else {
         if(post.sourceSite == "reddit"){
           let url = post.previewMediaURL;
           url = url.toString();
           if(url.includes(".jpg") || url.includes(".png")){
-          content = (<div id = "content"> <img className = "image" src = {post.previewMediaURL}></img> 
-          <p className = "text">{post.text}</p> </div>)
+          content = (<div className = "content" onClick ={function(){window.open(post.sourceURL)}}><img className = "image" src = {post.previewMediaURL}></img> 
+          <p className = "text">{post.text}</p></div>);
           } else {
-        ht = await getEmbed(post, post.sourceSite);
-        content = await ht.html;
-        content = <div className = "embed" dangerouslySetInnerHTML={{__html: content}} />
+          content = <div className = "content" onClick ={function(){window.open(post.sourceURL)}}><a href = {post.previewMediaURL}>{post.previewMediaURL}</a></div>
       } 
     }
     }
    } else {
-        let ht = await getEmbed(post, post.sourceSite);
-        content = await ht.html;
         let img;
         if(post.postType == "text"){
           img = <br></br>;
         } else{
           img = <img className = "image" src = {post.previewMediaURL}></img>;
         }
-      content = (<div ><div className = "embed" dangerouslySetInnerHTML={{ __html: content }} />{img}</div>);
+      content = (<div className = "content" onClick ={function(){window.open(post.sourceURL)}}><br></br> <p>{post.text}</p>{img}</div>);
       }
       let ht = (
     <div id = "Post" className = "post" > 
@@ -131,25 +127,11 @@ function getLogin(){
       );
       return ht;
     }
-
-    async function getEmbed(post, site){
-      if(site == "twitter"){
-      let htm = axios.get( "https://publish.twitter.com/oembed?url=" + post.sourceURL).then(function(result){
-         return result.data;
-      });
-      return await htm;
-    } else {
-      let htm = axios.get("https://www.reddit.com/oembed?url=" + post.sourceURL).then(function(result){
-        return result.data;
-      });
-      return await htm;
-    }
-    }
     
     function loadPost(){
       let s = [];
       let query = document.getElementById("search").value;
-    let posts = getPost(query, 10).then(function (result) {
+    let posts = getPost(query, 20).then(function (result) {
       s = result; 
        for(let i = 0; i < s.length; i++){
          renderPost(s);
@@ -157,6 +139,11 @@ function getLogin(){
       }, function () {console.log("failed")});
     }
 
+
+    function urlClick(url){
+      window.open(url);
+
+    }
 
     let getPost = async (query, limit) => {
       try {

@@ -14,8 +14,9 @@
 }
 
 .search-button {
-  background-color: #282c34;
+  background-color: #525968;
   color: white;
+  min-width: 20vh;
 }
 
 .Auth-link {
@@ -32,14 +33,17 @@
   background-color: #282c34;
 }
 
-.embed {
-  max-width: 100vh;
-}
-
 .content{
   color: white;
   line-break: normal;
   max-width: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.content:hover{
+  background-color: #525968;
 }
 
 .search {
