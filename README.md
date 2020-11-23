@@ -72,7 +72,8 @@ Example Axios Request:
  ```
  
 Example Response:
-```{
+```
+{
     "sortPref": "new",
     "typePref": "image",
     "sitePref": "reddit",
@@ -182,6 +183,8 @@ axios({
   }
 })
 ```
+
+Example Response: nothing
 
 ## 7) Delete User
 
