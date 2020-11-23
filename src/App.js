@@ -191,7 +191,7 @@ function getLogin(){
       <header className="App-header">
         <img src={trash} className="App-logo" alt="logo" />
         <p>
-          Welcome the Garbage Aggregator
+          Welcome the to Garbage Aggregator
         </p>
         <h3>
           You can use this site to find garbage from several social media sites, all at once!
