@@ -69,7 +69,7 @@ function Settings(user) {
               <p>Type of content: </p>
                   <input type = "radio"  id = "text"  name = "content" value = "text" defaultChecked = {user.content === "text"} ></input>
                   <label for = "text">Text</label><br></br>
-                  <input  type = "radio" value = "images" id = "images" name = "content" defaultChecked = {user.content ==="images"}></input>
+                  <input  type = "radio" value = "other" id = "images" name = "content" defaultChecked = {user.content ==="other"}></input>
                   <label for = "images">Images</label><br></br>
                   <input type = "radio" name = "content" id = "all" value = "all" defaultChecked = {user.content === "all"}></input>
                   <label for = "all">All</label>
