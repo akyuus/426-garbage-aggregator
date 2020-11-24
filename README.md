@@ -119,9 +119,9 @@ Parameters:
   1) username (string) - Your username.
   2) password (string) - Your password.
   3) sortPref (string) - Sorting preferences (see Preference object above).
-  4) typePref (string) - Type preferences 
-  5) sitePref (string) - Site preferences
-  6) reversePref (bool) - Reverse preference
+  4) typePref (string) - Type preferences.
+  5) sitePref (string) - Site preferences.
+  6) reversePref (bool) - Reverse preference.
 
 Response: Responds with a default Preferences object.
 
@@ -164,9 +164,9 @@ Parameters:
   1) username (string) - Your username.
   2) password (string) - Your password.
   3) sortPref (string) - Sorting preferences (see Preference object above).
-  4) typePref (string) - Type preferences 
-  5) sitePref (string) - Site preferences
-  6) reversePref (bool) - Reverse preference
+  4) typePref (string) - Type preferences.
+  5) sitePref (string) - Site preferences.
+  6) reversePref (bool) - Reverse preference.
 
 Example Axios Request: 
 ```js
@@ -198,9 +198,9 @@ Parameters:
   1) username (string) - Your username.
   2) password (string) - Your password.
   3) sortPref (string) - Sorting preferences (see Preference object above).
-  4) typePref (string) - Type preferences 
-  5) sitePref (string) - Site preferences
-  6) reversePref (bool) - Reverse preference
+  4) typePref (string) - Type preferences. 
+  5) sitePref (string) - Site preferences.
+  6) reversePref (bool) - Reverse preference.
   
 This fails and returns a 401 if you are not logged in as this user.
 
